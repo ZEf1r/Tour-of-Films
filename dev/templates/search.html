@@ -1,0 +1,62 @@
+<h1>{{title}}</h1>
+<div class="col-sm-offset-1 col-sm-10">
+    <div class="bs-component" [hidden]="submitted">
+        <form id="sbt-form" role="form" class="well form-inline" (ngSubmit)="onSubmit()" #filmForm="ngForm">
+            <fieldset>
+                <legend>Фiльтры по имени, году выпуска</legend>
+            </fieldset>
+            <div>
+                <div class="form-group">
+                    <label class="control-label" for="s">Title:</label>
+                    <input type="text" id="s" name="s" class="input-small" style="width: 140px;" required [(ngModel)]="model.ttle" #ttle="ngModel"> &nbsp;&nbsp;
+                    <label class="control-label" for="y">Year:</label>
+                    <input type="text" id="y" name="y" class="input-small" style="width: 40px;" [(ngModel)]="model.year"> &nbsp;&nbsp;
+                </div>
+                <!--<input type="hidden" name="page" id="page1" value="100">-->
+                <div class="form-group">
+                    <button id="search-by-title-button" type="submit" class="btn-sm btn-primary">Search</button>
+                    <button id="search-by-title-reset" type="reset" class="btn-sm">Reset</button>
+                </div>
+                <div class="radio"> Фильтр по типу:
+                    <label>
+                            <input type="radio" class="radiobox-boing" name="type" id="radio1" value="" checked
+                            [(ngModel)]="model.type"> All 
+                        </label>
+                    <label>
+                            <input type="radio" class="radiobox-focus" name="type" id="radio2" value="movie" [(ngModel)]="model.type"> movie
+                        </label>
+                    <label>
+                            <input type="radio" class="radiobox-ufo" name="type" id="radio3" value="series" [(ngModel)]="model.type"> series
+                        </label>
+                    <label>
+                            <input type="radio" class="radiobox-scatman" name="type" id="radio4" value="episode" [(ngModel)]="model.type"> episode
+                        </label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div [hidden]="!submitted">
+        <h2>You submitted the following:</h2>
+        <div class="row">
+            <div class="col-xs-3">title=</div>
+            <div class="col-xs-9  pull-left">{{ model.ttle }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">Year=</div>
+            <div class="col-xs-9 pull-left">{{ model.year }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">type=</div>
+            <div class="col-xs-9 pull-left">{{ model.type }}</div>
+        </div>
+        <br>
+        <button class="btn btn-default" (click)="submitted=false">Edit</button>
+    </div>
+</div>
+<p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+<div class="col-sm-offset-2 col-sm-8 table-responsive">
+    <table id="lof" class="table table-striped table-hover table-condensed">
+        <caption>List of find's</caption>
+
+    </table>
+</div>
