@@ -25,6 +25,7 @@
             'rxjs': 'npm:rxjs',
             'ts': 'npm:plugin-typescript@4.0.10/lib/plugin.js',
             'typescript': 'npm:typescript@2.0.3/lib/typescript.js',
+            'angular2-infinite-scroll': 'npm:angular2-infinite-scroll@0.2.6'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -33,6 +34,10 @@
                 defaultExtension: 'js'
             },
             rxjs: {
+                defaultExtension: 'js'
+            },
+            'angular2-infinite-scroll': {
+                main: 'angular2-infinite-scroll.js',
                 defaultExtension: 'js'
             }
         }

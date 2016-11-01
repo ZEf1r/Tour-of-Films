@@ -8,24 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var list_component_1 = require('./list.component');
 var http_1 = require('@angular/http');
 var search_component_1 = require('./search.component');
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
+var angular2_infinite_scroll_1 = require('angular2-infinite-scroll');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [
+                angular2_infinite_scroll_1.InfiniteScrollModule,
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule
             ],
             declarations: [
-                search_component_1.SearchComponent
+                search_component_1.SearchComponent,
+                list_component_1.ListComponent
             ],
             bootstrap: [search_component_1.SearchComponent]
         }), 

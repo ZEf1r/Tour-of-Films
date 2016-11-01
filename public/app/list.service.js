@@ -17,26 +17,33 @@ var ListService = (function () {
         this.http = http;
         this.heroesUrl = 'http://www.omdbapi.com/'; // URL to web API
     }
-    ListService.prototype.getFilms = function () {
+    ListService.prototype.query = function (obj) {
         var params = new http_2.URLSearchParams();
-        params.set('s', model.s);
-        params.set('location', model.y);
-        params.set('animal', model.type);
-        params.set('format', 'json');
-        params.set('callback', 'JSONP_CALLBACK');
-        return this.http.get(this.heroesUrl, { search: params })
+        params.set('s', obj.s);
+        if (obj.y) {
+            params.set('y', obj.y.toString());
+        }
+        ;
+        params.set('type', obj.type);
+        if (obj.page) {
+            params.set('page', obj.page.toString());
+        }
+        ;
+        return params;
+    };
+    ListService.prototype.getFilms = function (search) {
+        return this.http.get(this.heroesUrl, { search: this.query(search) })
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
     };
     ListService.prototype.extractData = function (res) {
+        //console.log('res', res);
+        var a = res.url.replace(/\bhttp:\/\/www.omdbapi.com\/\?\b/g, '');
         var body = res.json();
-        return body.Search || {};
+        sessionStorage.setItem(a, JSON.stringify(body));
+        return body || {};
     };
-    /*getFilm(imdbID: string): Promise<Lof> {
-        return this.getFilms()
-               .then(heroes => heroes.find(film => film.imdbID === imdbID));
-    }*/
     ListService.prototype.handleError = function (error) {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
