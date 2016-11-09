@@ -1,0 +1,52 @@
+<h2>FilmDetail</h2>
+<button (click)="goBack()">Back</button>
+<p>{{items}} </p>
+<div class="row" *ngIf="items">
+    <div class="col-sm-offset-1 col-sm-3">
+        <div class="poster" [ngStyle]="setPoster(items.Poster)"></div>
+        <span *ngIf="items.Released!='N/A'">Released : {{items.Released}}<br></span>
+        <span *ngIf="items.Rated!='N/A'">Rated : {{items.Rated}}<br></span>
+        <span *ngIf="items.Awards!='N/A'">Awards : {{items.Awards}}<br></span>
+        <span *ngIf="items.imdbRating!='N/A'">imdbRating : {{items.imdbRating}}<br></span>
+        <span *ngIf="items.imdbVotes!='N/A'">imdbVotes : {{items.imdbVotes}}<br></span>
+        <span>imdbID : {{items.imdbID}}</span>
+    </div>
+    <div class="col-sm-6">
+        <span>{{items.Title}}</span>
+        <div>
+            <span>{{items.Type}}, {{items.Year}}</span>
+        </div>
+        <div class="Genre">
+            <span class="lbl">Genre :</span>
+            <span class="cnt"> {{items.Genre}}</span>
+        </div>
+        <div class="Runtime">
+            <span class="lbl">Runtime :</span>
+            <span class="cnt"> {{items.Runtime}}</span>
+        </div>
+        <div class="Language" *ngIf="items.Language!='N/A'">
+            <span class="lbl">Language :</span>
+            <span class="cnt"> {{items.Language}}</span>
+        </div>
+        <div class="Country" *ngIf="items.Country!='N/A'">
+            <span class="lbl">Country :</span>
+            <span class="cnt"> {{items.Country}}</span>
+        </div>
+        <div class="About" *ngIf="items.About!='N/A'">
+            <span class="lbl">About :</span>
+            <span class="cnt"> {{items.Plot}}</span>
+        </div>
+        <div class="Director" *ngIf="items.Director!='N/A'">
+            <span class="lbl">Director :</span>
+            <span class="cnt"> {{items.Director}}</span>
+        </div>
+        <div class="Writer" *ngIf="items.Writer!='N/A'">
+            <span class="lbl">Writer :</span>
+            <span class="cnt"> {{items.Writer}}</span>
+        </div>
+        <div class="Actors" *ngIf="items.Actors!='N/A'">
+            <span class="lbl">Actors :</span>
+            <span class="cnt"> {{items.Actors}}</span>
+        </div>
+    </div>
+</div>
