@@ -1,4 +1,5 @@
-import { Srchstrng } from './srchstrng';
+import { Router } from '@angular/router';
+import { Srchstrng } from './srchstrng.interface';
 import { Lof } from './lof.interface';
 import { Component, Input } from '@angular/core';
 import { ListService } from './list.service';
@@ -6,8 +7,7 @@ import { ListService } from './list.service';
 @Component({
 	selector: 'find-films',
 	templateUrl: 'templates/filmlist.html',
-	styleUrls: ['styles/search.css'],
-	providers: [ListService]
+	styleUrls: ['styles/search.css']
 })
 export class ListComponent {
 	@Input() req: Srchstrng;
@@ -21,7 +21,7 @@ export class ListComponent {
 		this.showlist = val;
 	}
 	errorMessage: string;
-	constructor(private listService: ListService) {	}
+	constructor(private listService: ListService, private router: Router) { }
 	setPoster(purl: string) {
 		let propty = (purl == 'N/A') ? 'url("images/pstr_na.jpg")' : 'url(' + purl + ')';
 		let stls = {
@@ -29,23 +29,43 @@ export class ListComponent {
 		};
 		return stls;
 	}
+	detailFilm(id: string) {
+		let data = this.listService.dataCheck(id);
+		if (!data) {
+			this.listService.getFilms(id);
+			console.log('id:', data);
+		}
+	}
+	gotoFilm(id: string): void {
+		this.router.navigate(['/detail', id])
+	}
 	onScrollDown() {
 		console.log('scrolled!!');//test work scroll
 		let limpage = Math.ceil(this.fr / 10);
-		if (limpage>1){
-			if (this.req.page != undefined){
+		if (limpage > 1) {
+			if (this.req.page != undefined) {
 				this.req.page++ //for load next content
 			}
-			else this.req.page =2; //for load next content
-			
+			else this.req.page = 2; //for load next content
 			if (this.req.page <= limpage) {
-				this.listService.getFilms(this.req).then(
-					(films: any) => {
-						for (var f of films.Search) {
-							this.showlist.push(f);
-						}
-					},
-					(error: any) => this.errorMessage = <any>error)
+				let data = this.listService.dataCheck(this.req);
+				if (data) {
+					this.listService.getData(data).then(
+						(objfl: any) => {
+							for (var f of objfl.Search) {
+								this.showlist.push(f);
+							}
+						})
+				}
+				else {
+					this.listService.getFilms(this.req).then(
+						(films: any) => {
+							for (var f of films.Search) {
+								this.showlist.push(f);
+							}
+						},
+						(error: any) => this.errorMessage = <any>error)
+				}
 			}
 			else this.errorMessage = "end of list";
 		}

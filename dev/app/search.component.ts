@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Srchstrng } from "./srchstrng";
+import { Srchstrng } from "./srchstrng.interface";
 import { ListService } from './list.service';
 import { Lof } from './lof.interface';
 
 @Component({
-	selector: 'my-test',
-	templateUrl: 'templates/search.html',
-	providers: [ListService]
+	selector: 'my-search',
+	templateUrl: 'templates/search.html'
 })
 export class SearchComponent {
-	title = 'Tour of Films';
 	private submitted = false;
-	//errorMessage: string;
 	errmsg: any;
 	films: Lof[];
 	fndResult: number;
@@ -35,24 +32,28 @@ export class SearchComponent {
 		this.getFilms(val);
 		this.search = val;
 	}
-	edit(){
-		this.submitted=false;
-		if(this.search.page) delete this.search.page;
+	edit() {
+		this.submitted = false;
+		if (this.search.page) delete this.search.page;
 	}
-	clean(){
-		sessionStorage.clear()
+	clean() {
+		sessionStorage.clear();
+		console.log('Storage droped')
 	}
 	getFilms(req: Srchstrng) {
-		let a = this.listService.query(req).toString();
-		if (sessionStorage.getItem(a)) {
+		let data = this.listService.dataCheck(req);
+		if (data) {
+			this.listService.getData(data).then(
+				(objfl: any) => {
+					this.films = objfl.Search;
+					this.errmsg = objfl.Error;
+					this.fndResult = objfl.totalResults
+				}
+			);
 			// // for check cash-content
-			// console.log('sesion:', sessionStorage.getItem(a));
-			let objfl = JSON.parse(sessionStorage.getItem(a));
-			this.films = objfl.Search;
-			this.errmsg = objfl.Error;
-			this.fndResult = objfl.totalResults  
-        }
-        else {
+			//console.log('sesion:', data);
+		}
+		else {
 			this.listService.getFilms(req)
 				.then(
 				(films: any) => {
@@ -63,14 +64,4 @@ export class SearchComponent {
 				(error: any) => this.errmsg = <any>error);
 		}
 	}
-	/*// Remove all saved data from sessionStorage
-sessionStorage.clear();*/
-	//Math.ceil(parseInt(films.totalResults) / 10)
-	/*get diagnostic() {
-	  //console.log(this.serh.type);
-	  return JSON.stringify(this.films)
-	}
-	  errNotify(){
-		  g
-	  }*/
 }

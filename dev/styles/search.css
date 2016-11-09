@@ -1,7 +1,10 @@
 .poster {
-    width: 220px;
-    height: 300px;
+    min-width: 220px;
+    max-width: 222px;
+    min-height: 320px;
+    max-height: 363px;
     background-size: cover;
+    background-position: 80%;
 }
 
 #imbd {
