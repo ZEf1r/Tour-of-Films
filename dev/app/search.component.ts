@@ -13,7 +13,6 @@ export class SearchComponent {
 	films: Lof[];
 	fndResult: number;
 	constructor(private listService: ListService) { }
-	private serh: Srchstrng;
 	private search: Srchstrng;
 	private types = [
 		{ value: '', dsply: 'All', cls: 'radiobox-boing' },
@@ -21,12 +20,10 @@ export class SearchComponent {
 		{ value: 'series', dsply: 'Series', cls: 'radiobox-focus' },
 		{ value: 'episode', dsply: 'Episode', cls: 'radiobox-scatman' }
 	];
-	ngOnInit() {
-		this.serh = {
+	private serh: Srchstrng = {
 			s: '',
 			type: this.types[0].value
-		};
-	}
+		}
 	onSubmit(val: Srchstrng) {
 		this.submitted = true;
 		this.getFilms(val);

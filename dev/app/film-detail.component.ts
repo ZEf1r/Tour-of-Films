@@ -27,6 +27,7 @@ export class FilmDetailComponent implements OnInit {
 				(details: any) => this.items = details
 			)
 		}
+		else console.error('id:=', id)
 	}
 	goBack(): void {
 		this.location.back();

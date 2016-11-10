@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var router_1 = require('@angular/router');
 var list_component_1 = require('./list.component');
 var http_1 = require('@angular/http');
 var search_component_1 = require('./search.component');
@@ -15,6 +16,9 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var angular2_infinite_scroll_1 = require('angular2-infinite-scroll');
+var film_detail_component_1 = require('./film-detail.component');
+var list_service_1 = require('./list.service');
+var app_component_1 = require('./app.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -25,13 +29,33 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
                 platform_browser_1.BrowserModule,
-                forms_1.FormsModule
+                forms_1.FormsModule,
+                router_1.RouterModule.forRoot([
+                    {
+                        path: '',
+                        redirectTo: '/search',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'detail/:id',
+                        component: film_detail_component_1.FilmDetailComponent
+                    },
+                    {
+                        path: 'search',
+                        component: search_component_1.SearchComponent
+                    }
+                ])
             ],
             declarations: [
+                app_component_1.AppComponent,
                 search_component_1.SearchComponent,
+                film_detail_component_1.FilmDetailComponent,
                 list_component_1.ListComponent
             ],
-            bootstrap: [search_component_1.SearchComponent]
+            providers: [
+                list_service_1.ListService
+            ],
+            bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

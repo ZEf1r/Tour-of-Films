@@ -32,7 +32,7 @@
     <div [hidden]="!submitted">
         <div class="row">
             <button class="btn btn-default" (click)="edit()">Edit</button>
-            <span>Search result: {{fndResult? fndResult+" items":"0 items"}} </span>
+            <span>Search result: <b>{{fndResult? fndResult+" items":"0 items"}}</b></span>
         </div>
         <h2 *ngIf="errmsg" class="col-sm-offset-2 col-sm-4"><b>{{errmsg}}</b></h2>
         <!--test-->

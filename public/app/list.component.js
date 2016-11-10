@@ -8,12 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var srchstrng_1 = require('./srchstrng');
+var router_1 = require('@angular/router');
 var core_1 = require('@angular/core');
 var list_service_1 = require('./list.service');
 var ListComponent = (function () {
-    function ListComponent(listService) {
+    function ListComponent(listService, router) {
         this.listService = listService;
+        this.router = router;
         this.showlist = [];
     }
     Object.defineProperty(ListComponent.prototype, "fl", {
@@ -33,6 +34,16 @@ var ListComponent = (function () {
         };
         return stls;
     };
+    ListComponent.prototype.detailFilm = function (id) {
+        var data = this.listService.dataCheck(id);
+        if (!data) {
+            this.listService.getFilms(id);
+            console.log('id:', data);
+        }
+    };
+    ListComponent.prototype.gotoFilm = function (id) {
+        this.router.navigate(['/detail', id]);
+    };
     ListComponent.prototype.onScrollDown = function () {
         var _this = this;
         console.log('scrolled!!'); //test work scroll
@@ -44,12 +55,23 @@ var ListComponent = (function () {
             else
                 this.req.page = 2; //for load next content
             if (this.req.page <= limpage) {
-                this.listService.getFilms(this.req).then(function (films) {
-                    for (var _i = 0, _a = films.Search; _i < _a.length; _i++) {
-                        var f = _a[_i];
-                        _this.showlist.push(f);
-                    }
-                }, function (error) { return _this.errorMessage = error; });
+                var data = this.listService.dataCheck(this.req);
+                if (data) {
+                    this.listService.getData(data).then(function (objfl) {
+                        for (var _i = 0, _a = objfl.Search; _i < _a.length; _i++) {
+                            var f = _a[_i];
+                            _this.showlist.push(f);
+                        }
+                    });
+                }
+                else {
+                    this.listService.getFilms(this.req).then(function (films) {
+                        for (var _i = 0, _a = films.Search; _i < _a.length; _i++) {
+                            var f = _a[_i];
+                            _this.showlist.push(f);
+                        }
+                    }, function (error) { return _this.errorMessage = error; });
+                }
             }
             else
                 this.errorMessage = "end of list";
@@ -57,7 +79,7 @@ var ListComponent = (function () {
     };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', srchstrng_1.Srchstrng)
+        __metadata('design:type', Object)
     ], ListComponent.prototype, "req", void 0);
     __decorate([
         core_1.Input(), 
@@ -71,10 +93,9 @@ var ListComponent = (function () {
         core_1.Component({
             selector: 'find-films',
             templateUrl: 'templates/filmlist.html',
-            styleUrls: ['styles/search.css'],
-            providers: [list_service_1.ListService]
+            styleUrls: ['styles/search.css']
         }), 
-        __metadata('design:paramtypes', [list_service_1.ListService])
+        __metadata('design:paramtypes', [list_service_1.ListService, router_1.Router])
     ], ListComponent);
     return ListComponent;
 }());

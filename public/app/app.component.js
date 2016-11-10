@@ -9,18 +9,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var SearchComponent = (function () {
-    function SearchComponent() {
+var AppComponent = (function () {
+    function AppComponent() {
+        this.scrollup = {
+            name: 'UP', state: 'a',
+            toggleState: function () {
+                this.state = (this.state === 'b' ? 'a' : 'b');
+            }
+        };
         this.title = 'Tour of Films';
     }
-    SearchComponent = __decorate([
+    AppComponent.prototype.top = function () {
+        return (window.pageYOffset > 2000);
+    };
+    AppComponent.prototype.scrollTo = function () {
+        console.log("click shar!");
+        window.scroll(0, 0);
+    };
+    AppComponent = __decorate([
         core_1.Component({
             selector: 'my-test',
-            templateUrl: 'templates/searchcomponent.html',
-            styleUrls: ['styles/searchcomponent.css']
+            template: "\n    <h1>{{title}}</h1>\n    <nav>\n      <a routerLink=\"/search\" routerLinkActive=\"active\">Search</a>\n      <a routerLink=\"/detail\" routerLinkActive=\"active\">Heroes</a>\n    </nav>\n    <div [hidden]=\"!top()\" [@scrollState]=\"scrollup.state\"\n\t(mouseover)=\"scrollup.toggleState()\"\n\t(mouseout)=\"scrollup.toggleState()\"\n\t(click)=\"scrollTo()\"><br>{{scrollup.name}}</div>\n    <router-outlet></router-outlet>\n  ",
+            styles: ["\n    div {\n      width:50px;\n\t  height:110px;\n\t  background-image: url(\"images/shar.png\");\n\t  font: 18pt bold;\n\t  text-align: center;\n\t  right: 3px;\n\t  bottom: 1%;\n\t  z-index: 222;\n\t  cursor: pointer;\n\t  position: fixed;\n\t  border-radius: 30px 30px;\n    }\n  "],
+            animations: [
+                core_1.trigger('scrollState', [
+                    core_1.state('a', core_1.style({
+                        //backgroundColor: '#cf0', <img src="images/shar.png" alt="{{scrollup.name}}">
+                        transform: 'scale(0.5)',
+                        opacity: '0.2'
+                    })),
+                    core_1.state('b', core_1.style({
+                        //backgroundColor: '#0cf',
+                        opacity: '0.8',
+                        transform: 'scale(1)'
+                    })),
+                    core_1.transition('a <=> b', [
+                        core_1.animate('480ms ease-in', core_1.style({
+                            backgroundColor: '#0cf',
+                            transform: 'translateY(-5px)'
+                        }))
+                    ])
+                ])
+            ]
         }), 
         __metadata('design:paramtypes', [])
-    ], SearchComponent);
-    return SearchComponent;
+    ], AppComponent);
+    return AppComponent;
 }());
-exports.SearchComponent = SearchComponent;
+exports.AppComponent = AppComponent;

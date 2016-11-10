@@ -13,7 +13,6 @@ var list_service_1 = require('./list.service');
 var SearchComponent = (function () {
     function SearchComponent(listService) {
         this.listService = listService;
-        this.title = 'Tour of Films';
         this.submitted = false;
         this.types = [
             { value: '', dsply: 'All', cls: 'radiobox-boing' },
@@ -21,13 +20,11 @@ var SearchComponent = (function () {
             { value: 'series', dsply: 'Series', cls: 'radiobox-focus' },
             { value: 'episode', dsply: 'Episode', cls: 'radiobox-scatman' }
         ];
-    }
-    SearchComponent.prototype.ngOnInit = function () {
         this.serh = {
             s: '',
             type: this.types[0].value
         };
-    };
+    }
     SearchComponent.prototype.onSubmit = function (val) {
         this.submitted = true;
         this.getFilms(val);
@@ -40,17 +37,17 @@ var SearchComponent = (function () {
     };
     SearchComponent.prototype.clean = function () {
         sessionStorage.clear();
+        console.log('Storage droped');
     };
     SearchComponent.prototype.getFilms = function (req) {
         var _this = this;
-        var a = this.listService.query(req).toString();
-        if (sessionStorage.getItem(a)) {
-            // // for check cash-content
-            // console.log('sesion:', sessionStorage.getItem(a));
-            var objfl = JSON.parse(sessionStorage.getItem(a));
-            this.films = objfl.Search;
-            this.errmsg = objfl.Error;
-            this.fndResult = objfl.totalResults;
+        var data = this.listService.dataCheck(req);
+        if (data) {
+            this.listService.getData(data).then(function (objfl) {
+                _this.films = objfl.Search;
+                _this.errmsg = objfl.Error;
+                _this.fndResult = objfl.totalResults;
+            });
         }
         else {
             this.listService.getFilms(req)
@@ -63,9 +60,8 @@ var SearchComponent = (function () {
     };
     SearchComponent = __decorate([
         core_1.Component({
-            selector: 'my-test',
-            templateUrl: 'templates/search.html',
-            providers: [list_service_1.ListService]
+            selector: 'my-search',
+            templateUrl: 'templates/search.html'
         }), 
         __metadata('design:paramtypes', [list_service_1.ListService])
     ], SearchComponent);

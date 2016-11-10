@@ -18,18 +18,35 @@ var ListService = (function () {
         this.heroesUrl = 'http://www.omdbapi.com/'; // URL to web API
     }
     ListService.prototype.query = function (obj) {
+        //console.log("obj type:", typeof obj);
         var params = new http_2.URLSearchParams();
-        params.set('s', obj.s);
-        if (obj.y) {
-            params.set('y', obj.y.toString());
+        if (typeof obj === "object") {
+            params.set('s', obj.s);
+            if (obj.y) {
+                params.set('y', obj.y.toString());
+            }
+            ;
+            params.set('type', obj.type);
+            if (obj.page) {
+                params.set('page', obj.page.toString());
+            }
+            ;
         }
-        ;
-        params.set('type', obj.type);
-        if (obj.page) {
-            params.set('page', obj.page.toString());
+        else if (typeof obj === "string") {
+            params.set('i', obj);
+            params.set('plot', 'full');
         }
-        ;
         return params;
+    };
+    ListService.prototype.dataCheck = function (data) {
+        var a = this.query(data).toString();
+        if (sessionStorage.getItem(a)) {
+            return JSON.parse(sessionStorage.getItem(a));
+        }
+        return false;
+    };
+    ListService.prototype.getData = function (some) {
+        return Promise.resolve(some);
     };
     ListService.prototype.getFilms = function (search) {
         return this.http.get(this.heroesUrl, { search: this.query(search) })
@@ -40,6 +57,7 @@ var ListService = (function () {
     ListService.prototype.extractData = function (res) {
         //console.log('res', res);
         var a = res.url.replace(/\bhttp:\/\/www.omdbapi.com\/\?\b/g, '');
+        //console.log("url:", a);
         var body = res.json();
         sessionStorage.setItem(a, JSON.stringify(body));
         return body || {};
