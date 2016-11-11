@@ -7,7 +7,7 @@ import { ListService } from './list.service';
 @Component({
 	selector: 'find-films',
 	templateUrl: 'templates/filmlist.html',
-	styleUrls: ['styles/search.css']
+	styleUrls: ['css/search.css']
 })
 export class ListComponent {
 	@Input() req: Srchstrng;

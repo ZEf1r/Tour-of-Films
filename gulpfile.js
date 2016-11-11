@@ -8,74 +8,83 @@ var gulp = require("gulp"),
         }
     });
 
-var dbg = false;
-var wlax = {
+var prod = false;
+var path = {
     src: {
-        libs: [
-            'rxjs/**/*.js',
-            'zone.js/dist/**/*.js',
-            '@angular/**/*.js',
-            '!./**/esm/',
-            '!./**/esm/**/*',
-            '!./**/testing/',
-            '!./**/testing/**/*',
-            '!./**/test*.js',
-            '!rxjs/**/*.min.js',
-            '!@angular/**/*.min.js'
-        ],
-        ts: 'src/**/*.ts',
-        js: 'src/**/*.js',
-        style: ['src/css/*', '!src/css/bootstrap.css'],
-        img: 'src/images/**/*.*'
+        // libs: ['rxjs/**/*.js','zone.js/dist/**/*.js','@angular/**/*.js','!./**/esm/',
+        //     '!./**/esm/**/*','!./**/testing/','!./**/testing/**/*',
+        //     '!./**/test*.js','!rxjs/**/*.min.js','!@angular/**/*.min.js'
+        // ],
+        assets: 'dev/assets/**/*.*',
+        bootstrap: 'dev/styles/boo/_bootstrap.scss',
+        styles: ['dev/styles/**/*.scss', '!styles/boo/**/*.*']
     },
     pub: {
         html: 'public/',
-        lib: 'public/node_modules',
-        js: 'public/',
-        css: 'public/styles/',
-        img: 'public/images/',
-        fonts: 'public/fonts/',
-        admin: 'public/adminlte'
+        css: 'public/css/'
     },
-    tempad: [
-        'public/adminlte/**/*.css',
-        'public/adminlte/**/*.html'
-    ],
     watch: { //
-        ts: "src/**/*.ts",
         res: [
-            "src/**/*.html",
-            "src/**/*.css",
-            "src/**/*.js"
+            "dev/assets/**/*.html",
+            "dev/styles/**/*.scss"
         ]
     },
 };
-
-// Copy all required libraries into public directory.
-gulp.task("libs", function() {
-    return gulp.src(wlax.src.libs, { cwd: 'node_modules/**' }) /* Glob required here. */
+// 
+// Remove build directory.
+// 
+gulp.task("clean", function() {
+    return del(path.pub.html).then(function(paths) {
+        console.log('Deleted files and folders:\n', paths.join('\n'));
+    });
+});
+// 
+// Styles  compile.
+// 
+gulp.task("css", function() {
+    return gulp.src(path.src.style)
         .pipe(pl.plumber())
-        .pipe(pl.gupif(dbg, pl.filesize()))
-        .pipe(pl.rigger())
-        .pipe(pl.uglify())
-        .pipe(pl.gupif(dbg, pl.filesize()))
-        .pipe(gulp.dest(wlax.pub.lib))
-        .pipe(pl.notify({ message: 'Libs collecting is done', "onLast": true }));
+        .pipe(pl.sass().on('error', sass.logError))
+        .pipe(pl.gupif(prod, pl.autoprefixer()))
+        .pipe(pl.gupif(prod, cssnano()))
+        .pipe(gulp.dest(path.pub.css))
+        .pipe(pl.notify({ message: 'Styles collecting is done', "onLast": true }));
+});
+gulp.task("css:bo", function() {
+    return gulp.src(path.src.bootstrap)
+        .pipe(pl.plumber())
+        .pipe(pl.sass().on('error', sass.logError))
+        .pipe(pl.gupif(prod, pl.filesize()))
+        .pipe(pl.uncss({ html: path.watch.res[0] })) //[path.watch.res[0] 'src/index.html', 'src/templates/*.html']
+        .pipe(pl.gupif(prod, pl.autoprefixer()))
+        .pipe(pl.gupif(prod, cssnano()))
+        .pipe(pl.rename({ suffix: '.min' }))
+        .pipe(pl.gupif(prod, pl.filesize()))
+        .pipe(gulp.dest(path.pub.css));
+    //.on('error', console.log);
+});
+// Copy all required libraries into public directory.
+gulp.task("assets", function() {
+    return gulp.src(path.src.assets) /* Glob required here. */
+        .pipe(pl.plumber())
+        .pipe(pl.gupif(prod, pl.filesize()))
+        .pipe(gulp.dest(path.pub.html))
+        .pipe(pl.notify({ message: 'Loading is done', "onLast": true }));
 });
 
-gulp.task('default', ['libs']);
+// gulp.task('default', ['libs']);
 // Watch for changes in TypeScript, HTML and CSS files.
 /*gulp.task("watch", function() {
-    gulp.watch([wlax.watch.ts], ["compile"]).on("change", function(e) {
+    gulp.watch([path.watch.ts], ["compile"]).on("change", function(e) {
         console.log("TypeScript file " + e.path + " has been changed. Compiling.");
     });
-    gulp.watch([wlax.watch.res], ["res"]).on("change", function(e) {
+    gulp.watch([path.watch.res], ["res"]).on("change", function(e) {
         console.log("Resource file " + e.path + " has been changed. Updating.");
     });
 });
 //admin panel watch
 gulp.task("watch", function () {
-    gulp.watch([wlax.tempad]).on("change", function (e) {
+    gulp.watch([path.tempad]).on("change", function (e) {
         console.log("Resource file " + e.path + " has been changed. Updating.");
     });
 }); */

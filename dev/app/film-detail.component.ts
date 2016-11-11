@@ -5,7 +5,7 @@ import { ListService } from './list.service';
 @Component({
 	selector: 'film-detail',
 	templateUrl: 'templates/filmdetail.html',
-	styleUrls: ['styles/search.css']
+	styleUrls: ['css/search.css']
 })
 export class FilmDetailComponent implements OnInit {
 	private items: string[];

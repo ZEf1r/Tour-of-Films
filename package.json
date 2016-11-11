@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "gu": "gulp",
-    "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
+    "start": "tsc && concurrently \"gulp\" \"tsc -w\" \"lite-server\" ",
     "lite": "lite-server",
-    "postinstall": "typings install",
     "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "typings": "typings"
+    "tsc:w": "tsc -w"
   },
   "keywords": [],
   "author": "Aserum",
@@ -46,6 +44,7 @@
     "gulp-load-plugins": "^1.2.4",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
     "gulp-rigger": "^0.5.8",
     "gulp-sass": "^2.3.2",
     "gulp-tslint": "^4.3.3",
