@@ -1,10 +1,62 @@
 $orange:#f26739;
+$blue:#3b00c3;
+$laylow: #cbf300;
+$sky: #0990FE;
+$white: #ffe;
+$font-film-text: 15px;
+$ofsetPost: 15px;
+@mixin bant($bcolor, $radius) {
+    background-color: $bcolor;
+    border-radius: $radius;
+    color: $white;
+    font-size: $font-film-text;
+    padding: 5px;
+}
+
 .poster {
-    width: 220px;
-    height: 300px;
+    min-width: 220px;
+    max-width: 222px;
+    min-height: 320px;
+    max-height: 363px;
     background-size: cover;
+    background-position: 80%;
+    border-radius: 0 0 20px 20px;
 }
 
 #imbd {
     background-color: $orange;
+    color: $blue;
+}
+
+td {
+    padding-top: $ofsetPost;
+}
+
+.Ftitle {
+    color: #1717ff;
+    font-size: floor(($font-film-text * 1.7));
+    cursor: pointer;
+    /*outline: 7px outset red;
+    outline-offset: 35px;*/
+}
+
+.Ftype {
+    @include bant($sky, 7px 0 0 7px);
+}
+
+.Fyear {
+    @include bant($laylow, 0 7px 7px 0);
+}
+
+.lbl {
+    text-align: left;
+    font-size: $font-film-text;
+    background-color: $orange;
+    border-radius: 12px;
+    padding: 4px;
+    opacity: 0.7;
+}
+
+.plot {
+    margin-top: 3%;
 }

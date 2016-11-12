@@ -47,7 +47,7 @@ var FilmDetailComponent = (function () {
         core_1.Component({
             selector: 'film-detail',
             templateUrl: 'templates/filmdetail.html',
-            styleUrls: ['styles/search.css']
+            styleUrls: ['css/search.css']
         }), 
         __metadata('design:paramtypes', [router_1.ActivatedRoute, list_service_1.ListService, common_1.Location])
     ], FilmDetailComponent);

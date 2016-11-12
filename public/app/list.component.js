@@ -93,7 +93,7 @@ var ListComponent = (function () {
         core_1.Component({
             selector: 'find-films',
             templateUrl: 'templates/filmlist.html',
-            styleUrls: ['styles/search.css']
+            styleUrls: ['css/search.css']
         }), 
         __metadata('design:paramtypes', [list_service_1.ListService, router_1.Router])
     ], ListComponent);

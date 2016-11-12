@@ -1,0 +1,47 @@
+.poster {
+  min-width: 220px;
+  max-width: 222px;
+  min-height: 320px;
+  max-height: 363px;
+  background-size: cover;
+  background-position: 80%;
+  border-radius: 0 0 20px 20px; }
+
+#imbd {
+  background-color: #f26739;
+  color: #3b00c3; }
+
+td {
+  padding-top: 15px; }
+
+.Ftitle {
+  color: #1717ff;
+  font-size: 25px;
+  cursor: pointer;
+  /*outline: 7px outset red;
+    outline-offset: 35px;*/ }
+
+.Ftype {
+  background-color: #0990FE;
+  border-radius: 7px 0 0 7px;
+  color: #ffe;
+  font-size: 15px;
+  padding: 5px; }
+
+.Fyear {
+  background-color: #cbf300;
+  border-radius: 0 7px 7px 0;
+  color: #ffe;
+  font-size: 15px;
+  padding: 5px; }
+
+.lbl {
+  text-align: left;
+  font-size: 15px;
+  background-color: #f26739;
+  border-radius: 12px;
+  padding: 4px;
+  opacity: 0.7; }
+
+.plot {
+  margin-top: 3%; }

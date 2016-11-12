@@ -6,7 +6,6 @@ import { animate, Component, Input, state, style, transition, trigger } from '@a
     <h1>{{title}}</h1>
     <nav>
       <a routerLink="/search" routerLinkActive="active">Search</a>
-      <a routerLink="/detail" routerLinkActive="active">Heroes</a>
     </nav>
     <div [hidden]="!top()" [@scrollState]="scrollup.state"
 	(mouseover)="scrollup.toggleState()"
@@ -33,13 +32,13 @@ import { animate, Component, Input, state, style, transition, trigger } from '@a
 		trigger('scrollState', [
 			state('a', style({
 				//backgroundColor: '#cf0', <img src="images/shar.png" alt="{{scrollup.name}}">
-				transform: 'scale(0.5)',
-				opacity: '0.2'
+				transform: 'scale(0.7)',
+				opacity: '0.4'
 			})),
 			state('b', style({
 				//backgroundColor: '#0cf',
-				opacity: '0.8',
-				transform: 'scale(1)'
+				opacity: '0.9',
+				transform: 'scale(1.1)'
 			})),
 			transition('a <=> b', [
 				animate('480ms ease-in', style({
@@ -52,7 +51,7 @@ import { animate, Component, Input, state, style, transition, trigger } from '@a
 })
 export class AppComponent {
 	top() {
-		return (window.pageYOffset > 2000)
+		return (window.pageYOffset > 1200)
 	}
 	private scrollup = {
 		name: 'UP', state: 'a',
