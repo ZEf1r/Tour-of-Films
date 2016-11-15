@@ -301,3 +301,11 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+#mylist
+jsconfig.json
+bs-config.json
+gulpfile.js
+typings/
+temp/
+.vscode/

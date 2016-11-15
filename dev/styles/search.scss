@@ -1,0 +1,89 @@
+$orange:#f26739;
+$blue:#3b00c3;
+$laylow: #93ac15;
+$sky: #0990FE;
+$white: #ffe;
+$lblcol: lighten($orange, 20.5%);
+$font-film-text: 15px;
+$ofsetPost: 15px;
+$bgText:rgba(211, 230, 230, 0.59);
+$tenpx: 10px;
+@mixin bant($bcolor, $radius, $padd) {
+    background-color: $bcolor;
+    border-radius: $radius;
+    color: $white;
+    font-size: $font-film-text;
+    padding: $padd/2;
+}
+
+.poster {
+    min-width: $tenpx*22;
+    max-width: ($tenpx*22)+2;
+    min-height: $tenpx*32;
+    max-height: ($tenpx*36)+3;
+    background-size: cover;
+    background-position: 80%;
+    border-radius: 0 0 $tenpx*2 $tenpx*2;
+}
+
+#imbd {
+    background-color: $orange;
+    color: $blue;
+}
+
+td {
+    padding-top: $ofsetPost;
+}
+
+.Ftitle {
+    color: #1717ff;
+    font-size: floor(($font-film-text * 1.7));
+    font-weight: 700;
+    text-shadow: -2px 2px 3px black, 3px 3px 3px #62bb00;
+    cursor: pointer;
+    margin-left: 3%;
+}
+
+.Ftype {
+    @include bant($sky, 7px 0 0 7px, $tenpx);
+    margin-left: 4%;
+}
+
+.Fyear {
+    @include bant($laylow, 0 7px 7px 0, $tenpx);
+}
+
+.lbl {
+    text-align: left;
+    font-size: $font-film-text;
+    background-color: $lblcol;
+    border-radius: 0 $tenpx+2 $tenpx+2 0;
+    padding: ($tenpx)-6;
+}
+
+.cnt {
+    font-size: floor(($font-film-text * 1.3));
+    text-shadow: 1px 0px 0px black, 0 0 10px #62bb00;
+}
+
+.plot {
+    margin-top: 3%;
+}
+
+.opts {
+    @include bant($bgText, 0 $tenpx*5 $tenpx*5 0, $tenpx*3);
+}
+
+h2 {
+    font-size: 215%;
+    font-weight: 800;
+    margin-left: 5%;
+    text-shadow: -1px 2px 2px #089a0e, -3px 3px 0.2em #d8aea1;
+}
+
+#result {
+    font-size: floor(($font-film-text * 1.4));
+    color: rgb(10, 16, 47);
+    background-color: lighten($sky, 40%);
+    padding: 0 $tenpx;
+}
