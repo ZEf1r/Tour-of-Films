@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="/">
+    <title>Angular Tour of Films</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Polyfill(s) for older browsers -->
+    <script src="https://unpkg.com/core-js/client/shim.min.js"></script>
+    <script src="https://unpkg.com/zone.js@0.6.25?main=browser"></script>
+    <script src="https://unpkg.com/reflect-metadata@0.1.3"></script>
+    <script src="https://unpkg.com/systemjs@0.19.27/dist/system.src.js"></script>
+    <!-- 1. Load libraries -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.rawgit.com/720kb/radiobox.css/master/dist/css/radiobox.min.css" media="screen" rel="stylesheet">
+    <!-- 2. Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+    <script>
+        System.import('app').catch(function(err) {
+            console.error(err);
+        });
+    </script>
+</head>
+<!-- 3. Display the application -->
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <my-test>Loading...</my-test>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+</body>
+
+</html>
