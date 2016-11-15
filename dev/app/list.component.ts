@@ -23,9 +23,8 @@ export class ListComponent {
 	errorMessage: string;
 	constructor(private listService: ListService, private router: Router) { }
 	setPoster(purl: string) {
-		let propty = (purl == 'N/A') ? 'url("images/pstr_na.jpg")' : 'url(' + purl + ')';
 		let stls = {
-			'background-image': propty
+			'background-image': (purl == 'N/A') ? 'url("images/pstr_na.jpg")' : 'url(' + purl + '), url("images/pstr_na.jpg")'
 		};
 		return stls;
 	}
@@ -33,7 +32,6 @@ export class ListComponent {
 		let data = this.listService.dataCheck(id);
 		if (!data) {
 			this.listService.getFilms(id);
-			console.log('id:', data);
 		}
 	}
 	gotoFilm(id: string): void {

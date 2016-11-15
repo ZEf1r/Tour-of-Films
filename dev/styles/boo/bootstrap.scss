@@ -5,6 +5,15 @@
  */
 
 // Core variables and mixins
+body {
+    background: url("../images/fone-film-backgrounds.jpg");
+}
+
+$well-bg :rgba(226,
+115,
+28,
+0.65);
+$legend-border-color: #3F51B5;
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
 // Reset and dependencies

@@ -1,7 +1,7 @@
 <h2>FilmDetail</h2>
-<button (click)="goBack()">Back</button>
+<button class="btn" (click)="goBack()">Back</button>
 <div class="row" *ngIf="items">
-    <div class="col-sm-offset-1 col-sm-3">
+    <div class="col-xs-offset-1 col-sm-2">
         <div class="poster" [ngStyle]="setPoster(items.Poster)"></div>
         <span class="badge" *ngIf="items.Released!='N/A'">Released : {{items.Released}}<br></span>
         <span class="badge" *ngIf="items.Rated!='N/A'">Rated : {{items.Rated}}<br></span>
@@ -10,42 +10,42 @@
         <span class="badge" *ngIf="items.imdbVotes!='N/A'">imdbVotes : {{items.imdbVotes}}<br></span>
         <span class="badge">imdbID : {{items.imdbID}}</span>
     </div>
-    <div class="col-sm-6">
+    <div class="col-xs-offset-1 col-sm-offset-2 col-md-offset-1 col-sm-5 col-md-5 opts">
         <span class="Ftitle">{{items.Title}}</span>
         <div>
             <span class="Ftype">{{items.Type}}</span><span class="Fyear">{{items.Year}}</span>
         </div>
         <div class="plot Genre">
             <span class="lbl">Genre :</span>
-            <span class="cnt"> {{items.Genre}}</span>
+            <span class="cnt text-primary"> {{items.Genre}}</span>
         </div>
         <div class="plot Runtime">
             <span class="lbl">Runtime :</span>
-            <span class="cnt"> {{items.Runtime}}</span>
+            <span class="cnt text-primary"><i class="glyphicon glyphicon-time"></i> {{items.Runtime}}</span>
         </div>
         <div class="plot Language" *ngIf="items.Language!='N/A'">
             <span class="lbl">Language :</span>
-            <span class="cnt"> {{items.Language}}</span>
+            <span class="cnt text-primary"> {{items.Language}}</span>
         </div>
         <div class="plot Country" *ngIf="items.Country!='N/A'">
             <span class="lbl">Country :</span>
-            <span class="cnt"> {{items.Country}}</span>
+            <span class="cnt text-primary"> {{items.Country}}</span>
         </div>
         <div class="plot About" *ngIf="items.About!='N/A'">
             <span class="lbl">About :</span>
-            <span class="cnt"> {{items.Plot}}</span>
+            <span class="cnt text-primary"> {{items.Plot}}</span>
         </div>
         <div class="plot Director" *ngIf="items.Director!='N/A'">
             <span class="lbl">Director :</span>
-            <span class="cnt"> {{items.Director}}</span>
+            <span class="cnt text-primary"> {{items.Director}}</span>
         </div>
         <div class="plot Writer" *ngIf="items.Writer!='N/A'">
             <span class="lbl">Writer :</span>
-            <span class="cnt"> {{items.Writer}}</span>
+            <span class="cnt text-primary"> {{items.Writer}}</span>
         </div>
         <div class="plot Actors" *ngIf="items.Actors!='N/A'">
             <span class="lbl">Actors :</span>
-            <span class="cnt"> {{items.Actors}}</span>
+            <span class="cnt text-primary"> {{items.Actors}}</span>
         </div>
     </div>
 </div>

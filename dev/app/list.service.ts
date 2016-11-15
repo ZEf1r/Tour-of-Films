@@ -10,7 +10,6 @@ export class ListService {
     private heroesUrl = 'http://www.omdbapi.com/';  // URL to web API
     constructor(private http: Http) { }
     query(obj: Qry) {
-        //console.log("obj type:", typeof obj);
         let params = new URLSearchParams();
         if (typeof obj === "object") {
             params.set('s', obj.s);
@@ -27,6 +26,9 @@ export class ListService {
             params.set('plot', 'full')
         }
         return params
+    }
+    urlCheck(s:string){
+        
     }
     dataCheck(data: Qry) {
         let a = this.query(data).toString();
@@ -45,9 +47,7 @@ export class ListService {
             .catch(this.handleError);
     }
     private extractData(res: Response) {
-        //console.log('res', res);
         let a = res.url.replace(/\bhttp:\/\/www.omdbapi.com\/\?\b/g, '');
-        //console.log("url:", a);
         let body = res.json();
         sessionStorage.setItem(a, JSON.stringify(body));
         return body || {};

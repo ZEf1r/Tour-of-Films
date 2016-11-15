@@ -5,7 +5,8 @@ import { Lof } from './lof.interface';
 
 @Component({
 	selector: 'my-search',
-	templateUrl: 'templates/search.html'
+	templateUrl: 'templates/search.html',
+	styleUrls: ['css/search.css']
 })
 export class SearchComponent {
 	private submitted = false;

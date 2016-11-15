@@ -17,9 +17,7 @@ export class FilmDetailComponent implements OnInit {
 	ngOnInit() {
 		let id: string;
 		this.route.params.forEach((params: Params) => {
-			//console.log('params:=', params);
 			id = params['id'];
-			//console.log('id:=', id)
 		});
 		let a = this.listService.dataCheck(id);
 		if (a) {
@@ -27,16 +25,13 @@ export class FilmDetailComponent implements OnInit {
 				(details: any) => this.items = details
 			)
 		}
-		else console.error('id:=', id)
 	}
 	goBack(): void {
 		this.location.back();
 	}
 	setPoster(purl: string) {
-		let propty = (purl == 'N/A') ? 'url("images/pstr_na.jpg")' : 'url(' + purl + ')';
 		let stls = {
-			'background-image': propty,
-			//'background-size': 'cover'
+			'background-image': (purl == 'N/A') ? 'url("images/pstr_na.jpg")' : 'url(' + purl + '), url("images/pstr_na.jpg")'
 		};
 		return stls;
 	}

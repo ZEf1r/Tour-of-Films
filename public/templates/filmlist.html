@@ -1,6 +1,6 @@
 <div *ngIf="fl" class="col-sm-offset-2 col-sm-8 table-responsive" infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="200" (scrolled)="onScrollDown()">
     <table class="table">
-        <caption>List of find's</caption>
+        <caption>Aserum</caption>
         <template let-film ngFor [ngForOf]="showlist">
             <tr>
                 <td>
@@ -9,11 +9,11 @@
                     </div>
                 </td>
                 <td>
-                    <span class="Ftitle" (mouseup)="gotoFilm(film.imdbID)" (mouseover)="detailFilm(film.imdbID)">{{film.Title | uppercase}}</span><br/>
-                    <span class="Ftype">{{film.Type}}</span><span class="Fyear">{{film.Year}}</span>
+                    <span class="Ftitle" (click)="gotoFilm(film.imdbID)" (mouseover)="detailFilm(film.imdbID)">{{film.Title | uppercase}}</span><br/>
+                    <span class="Ftype"><i class="glyphicon glyphicon-film"></i> {{film.Type}}</span><span class="Fyear">{{film.Year}}</span>
                 </td>
             </tr>
         </template>
     </table>
-    <p class="error col-xs-4 pull-left" *ngIf="errorMessage">{{errorMessage}}</p>
+    <p class="error col-xs-4 pull-left" *ngIf="errorMessage"><i class="glyphicon glyphicon-exclamation-sign"></i> {{errorMessage}}</p>
 </div>
