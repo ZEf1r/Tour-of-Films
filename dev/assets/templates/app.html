@@ -1,8 +1,0 @@
-<div>
-    <h1 id="tit"><img src="../images/Ang2.png" width="50" alt="aserum"> {{title}}</h1>
-</div>
-<nav>
-    <a class="btn btn-sm btn-info" routerLink="/search" routerLinkActive="active"><i class="glyphicon glyphicon-link"></i> Search</a>
-</nav>
-<div id="scrollup" [hidden]="!top()" [@scrollState]="scrollup.state" (mouseover)="scrollup.toggleState()" (mouseout)="scrollup.toggleState()" (click)="scrollTo()"><br>{{scrollup.name}}</div>
-<router-outlet></router-outlet>
